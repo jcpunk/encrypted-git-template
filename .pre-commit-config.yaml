@@ -1,0 +1,10 @@
+repos:
+- repo: local
+  hooks:
+    - id: no-unencrypted
+      name: Checking for Unencrypted Files
+      description: Look for unencrypted files in the unencrypted directory
+      entry: /bin/false
+      files: .*
+      exclude: (^bin|^hooks|^ENCRYPTED_DATA|^README.md$|^.pre-commit-config.yaml$|^\.wrapped-.*-passphrase)
+      language: system

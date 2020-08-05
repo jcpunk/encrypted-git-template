@@ -1,0 +1,23 @@
+[Unit]
+Description=Mount an eCryptfs directory
+After=remote-fs.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+StandardOutput=journal
+
+WorkingDirectory=/path/to/git/repo
+ExecStop=/usr/bin/umount ./unencrypted
+
+## Newish systemd supports this
+#StandardInput=file:/root/ecryptfs-pass
+#ExecStart=/path/to/bin/mount.sh
+#KeyringMode=inherit
+
+ExecStart=/usr/libexec/mount-encrypted-dir.sh
+
+
+
+[Install]
+WantedBy=multi-user.target
